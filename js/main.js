@@ -42,11 +42,11 @@ function getMobileOperatingSystem() {
                 window.audioContext
             ));
             soundMeter.connectToSource(stream, function(e) {
-                // if (e) {
-                //     alert(e);
-                //     return;
-                // }
-                // setInterval(() => {
+                if (e) {
+                    alert(e);
+                    return;
+                }
+                setInterval(() => {
                     // instantMeter.value = instantValueDisplay.innerText = soundMeter.instant.toFixed(
                     //     2
                     // );
@@ -55,7 +55,6 @@ function getMobileOperatingSystem() {
                     //     2
                     // );
                     // clipMeter.value = clipValueDisplay.innerText = soundMeter.clip;
-                // }, 200);
                 if (soundMeter.instant.toFixed(2) >= 0.15) {
                   body.querySelector('.flame').style.display = 'none';
                     setTimeout(() => {
@@ -63,6 +62,8 @@ function getMobileOperatingSystem() {
                         console.log('FIRE!');
                     }, 5000);
                 }
+            }, 200);
+
             });
         }
 
