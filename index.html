@@ -1,90 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+ *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+-->
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>DecibelMeter example</title>
-    
-    <link rel="stylesheet" href="font/decibel-meter/style.css">
-    <link rel="stylesheet" href="example.css">
+
+	<meta charset="utf-8">
+	<meta name="description" content="WebRTC code samples">
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+	<meta itemprop="description" content="Client-side WebRTC code samples">
+	<meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
+	<meta itemprop="name" content="WebRTC code samples">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta id="theme-color" name="theme-color" content="#ffffff">
+
+	<base target="_blank">
+
+	<title>Audio stream volume</title>
+
+	<link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
+	<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="../../../css/main.css" />
+	<link rel="stylesheet" href="css/main.css" />
+
 </head>
 
 <body>
 
-<div id="message">Click mic to toggle listening</div>
+	<div class="candle">
+        <div class="flame">
+          <div class="shadows"></div>
+          <div class="top"></div>
+          <div class="middle"></div>
+          <div class="bottom"></div>
+        </div>
+        <div class="wick"></div>
+        <div class="wax"></div>
+      </div>
 
-<div id="meter" class="icon-microphone"><span></span></div>
- <script>
- function getMobileOperatingSystem() {
-  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-      // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-        return "Windows Phone";
-    }else if (/android/i.test(userAgent)) {
-		alert('Android');
-        // return "Android";
-    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-	 // iOS detection from: http://stackoverflow.com/a/9039885/177710
-		alert('IOS');
-        return "iOS";
-    } else{
-		alert('COMPUTER');
-	}
+	<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+	<script src="js/soundmeter.js"></script>
+	<script src="js/main.js" async></script>
 
-    return "unknown";
-}
-getMobileOperatingSystem();
- </script>
-
-<!-- <script src="decibel-meter.js"></script>
-
-<script>
-
-	// HTML elements
-	
-	var meterEl = document.getElementById('meter'),
-		levelEl = document.querySelector('#meter > span');
-	
-	
-	// Decibel Meter
-	
-	var meter = DecibelMeter.create('meter');
-	
-	// listen for audio sources to be ready
-	
-	meter.on('ready', function (meter, sources) {
-		var mic = sources[0]; // select first mic
-		meter.connect(mic); // connect to mic
-	});
-	
-	// adjust displayed level when audio sampled
-	
-	meter.on('sample', function (dB, percent, level) {
-		levelEl.style.height = (percent * 100) + '%';
-	});
-	
-	// change element class when meter starts listening
-	
-	meter.on('listen', function (meter) {
-		meterEl.classList.add('active');
-	});
-	
-	// change element class when meter stops listening
-	
-	meter.on('stop-listening', function (meter) {
-		meterEl.classList.remove('active');
-		levelEl.style.height = 0;
-	});
-	
-	// clicking the meter element will toggle listening
-	
-	meterEl.addEventListener('click', function (e) {
-		if (meter.listening)
-			meter.stopListening();
-		else
-			meter.listen();
-	});
-
-</script> -->
+	<script src="js/ga.js"></script>
 </body>
+
 </html>
