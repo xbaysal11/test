@@ -20,6 +20,7 @@ window.onload = function() {
                     setInterval(() => {
                         console.log(soundMeter.instant.toFixed(2));
                         if (soundMeter.instant.toFixed(2) >= 0.10) {
+                            alert(soundMeter.instant.toFixed(2));
                             var body = document.querySelector('body');
                             body.querySelector('.flame').style.display = 'none';
                             setTimeout(() => {
