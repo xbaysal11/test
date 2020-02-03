@@ -56,7 +56,7 @@ function getMobileOperatingSystem() {
                     // );
                     // clipMeter.value = clipValueDisplay.innerText = soundMeter.clip;
                 // }, 200);
-                if (soundMeter.instant.toFixed(2) > 0.40) {
+                if (soundMeter.instant.toFixed(2) >= 0.15) {
                   body.querySelector('.flame').style.display = 'none';
                     setTimeout(() => {
                         body.querySelector('.flame').style.display = '';
