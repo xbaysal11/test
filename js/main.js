@@ -8,7 +8,7 @@
 
 /* global AudioContext, SoundMeter */
 
-
+window.onload = function() {
 try {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     window.audioContext = new AudioContext();
@@ -46,8 +46,11 @@ const constraints = (window.constraints = {
                     //     2
                     // );
                     // clipMeter.value = clipValueDisplay.innerText = soundMeter.clip;
-                if (soundMeter.instant.toFixed(2) >= 0.05) {
-                    alert('FIRE OFF!!!!')
+                    console.log(soundMeter.instant.toFixed(2));
+                if (soundMeter.instant.toFixed(2) >= 0.15) {
+                    // alert('FIRE OFF!!!!')
+        var body = document.querySelector('body');
+
                   body.querySelector('.flame').style.display = 'none';
                     setTimeout(() => {
                         body.querySelector('.flame').style.display = '';
@@ -130,3 +133,4 @@ const constraints = (window.constraints = {
     // }
 // }
 // getMobileOperatingSystem();
+}
