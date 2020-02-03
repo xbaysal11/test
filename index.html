@@ -13,8 +13,30 @@
 <div id="message">Click mic to toggle listening</div>
 
 <div id="meter" class="icon-microphone"><span></span></div>
+ <script>
+ function getMobileOperatingSystem() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-<script src="decibel-meter.js"></script>
+      // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "Windows Phone";
+    }else if (/android/i.test(userAgent)) {
+		alert('Android');
+        // return "Android";
+    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+	 // iOS detection from: http://stackoverflow.com/a/9039885/177710
+		alert('IOS');
+        return "iOS";
+    } else{
+		alert('COMPUTER');
+	}
+
+    return "unknown";
+}
+getMobileOperatingSystem();
+ </script>
+
+<!-- <script src="decibel-meter.js"></script>
 
 <script>
 
@@ -63,6 +85,6 @@
 			meter.listen();
 	});
 
-</script>
+</script> -->
 </body>
 </html>
