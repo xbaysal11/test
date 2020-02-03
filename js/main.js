@@ -8,15 +8,6 @@
 
 /* global AudioContext, SoundMeter */
 
-'use strict';
-
-const instantMeter = document.querySelector('#instant meter');
-const slowMeter = document.querySelector('#slow meter');
-const clipMeter = document.querySelector('#clip meter');
-
-const instantValueDisplay = document.querySelector('#instant .value');
-const slowValueDisplay = document.querySelector('#slow .value');
-const clipValueDisplay = document.querySelector('#clip .value');
 
 try {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -31,10 +22,10 @@ const constraints = (window.constraints = {
   video: false
 });
 
-function getMobileOperatingSystem() {
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      alert('IOS');
+// function getMobileOperatingSystem() {
+    // var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    // if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    //   alert('IOS');
 
         function handleSuccess(stream) {
             window.stream = stream;
@@ -55,7 +46,8 @@ function getMobileOperatingSystem() {
                     //     2
                     // );
                     // clipMeter.value = clipValueDisplay.innerText = soundMeter.clip;
-                if (soundMeter.instant.toFixed(2) >= 0.15) {
+                if (soundMeter.instant.toFixed(2) >= 0.05) {
+                    alert('FIRE OFF!!!!')
                   body.querySelector('.flame').style.display = 'none';
                     setTimeout(() => {
                         body.querySelector('.flame').style.display = '';
@@ -79,60 +71,62 @@ function getMobileOperatingSystem() {
             .getUserMedia(constraints)
             .then(handleSuccess)
             .catch(handleError);
-    } else {
-        var body,
-            num,
-            array,
-            width,
-            context,
-            analyser,
-            src,
-            height;
 
-        body = document.querySelector('body');
-        num = 32;
-        array = new Uint8Array(num * 2);
-        width = 10;
-        window.onclick = function() {
-            if (context) return;
-            context = new AudioContext();
-            analyser = context.createAnalyser();
-            context.resume().then(() => {
-                console.log('Playback resumed successfully');
-            });
-            navigator.mediaDevices
-                .getUserMedia({
-                    audio: true
-                })
-                .then(stream => {
-                    src = context.createMediaStreamSource(stream);
-                    src.connect(analyser);
-                    loop();
-                })
-                .catch(error => {
-                    alert(error + '\r\n Отклонено. Страница будет обновлена!');
-                    location.reload();
-                });
-        };
+            
+    // } else {
+    //     var body,
+    //         num,
+    //         array,
+    //         width,
+    //         context,
+    //         analyser,
+    //         src,
+    //         height;
 
-        function loop() {
-            window.requestAnimationFrame(loop);
-            analyser.getByteFrequencyData(array);
-            for (var i = 0; i < num; i++) {
-                height = array[i + num];
-                if (height > 210) {
-                    console.log('OFF!');
-                    console.log(`Volume: ${height}`);
+    //     body = document.querySelector('body');
+    //     num = 32;
+    //     array = new Uint8Array(num * 2);
+    //     width = 10;
+    //     window.onclick = function() {
+    //         if (context) return;
+    //         context = new AudioContext();
+    //         analyser = context.createAnalyser();
+    //         context.resume().then(() => {
+    //             console.log('Playback resumed successfully');
+    //         });
+    //         navigator.mediaDevices
+    //             .getUserMedia({
+    //                 audio: true
+    //             })
+    //             .then(stream => {
+    //                 src = context.createMediaStreamSource(stream);
+    //                 src.connect(analyser);
+    //                 loop();
+    //             })
+    //             .catch(error => {
+    //                 alert(error + '\r\n Отклонено. Страница будет обновлена!');
+    //                 location.reload();
+    //             });
+    //     };
 
-                    body.querySelector('.flame').style.display = 'none';
-                    setTimeout(() => {
-                        body.querySelector('.flame').style.display = '';
-                        console.log('FIRE!');
-                    }, 5000);
-                }
-            }
-        }
-        alert('Click candle once to start!');
-    }
-}
-getMobileOperatingSystem();
+    //     function loop() {
+    //         window.requestAnimationFrame(loop);
+    //         analyser.getByteFrequencyData(array);
+    //         for (var i = 0; i < num; i++) {
+    //             height = array[i + num];
+    //             if (height > 210) {
+    //                 console.log('OFF!');
+    //                 console.log(`Volume: ${height}`);
+
+    //                 body.querySelector('.flame').style.display = 'none';
+    //                 setTimeout(() => {
+    //                     body.querySelector('.flame').style.display = '';
+    //                     console.log('FIRE!');
+    //                 }, 5000);
+    //             }
+    //         }
+    //     }
+    //     alert('Click candle once to start!');
+    // }
+// }
+// getMobileOperatingSystem();
